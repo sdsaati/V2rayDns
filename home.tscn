@@ -1,0 +1,130 @@
+[gd_scene load_steps=12 format=3 uid="uid://dftxt3p3802ia"]
+
+[ext_resource type="Script" uid="uid://bd7rdlgn55cgg" path="res://state_machine.gd" id="2_o1ld7"]
+[ext_resource type="Shader" uid="uid://7jlk4emrj8iu" path="res://home.gdshader" id="2_vqw7c"]
+[ext_resource type="StyleBox" uid="uid://c0rllp6vwmq8p" path="res://btn.tres" id="3_86xni"]
+[ext_resource type="Texture2D" uid="uid://dxe5ac0wm3e7b" path="res://w2.jpg" id="3_vqw7c"]
+[ext_resource type="Script" uid="uid://dlsvm5blvsdwi" path="res://idle.gd" id="3_w1mvj"]
+[ext_resource type="StyleBox" uid="uid://bvfdx15e8r82u" path="res://btn_hover.tres" id="4_86xni"]
+[ext_resource type="StyleBox" uid="uid://18tv7akmpy2t" path="res://btn_disable.tres" id="5_qq0qw"]
+[ext_resource type="Script" uid="uid://dhdjhbohset8x" path="res://disconnected.gd" id="7_q6q8i"]
+[ext_resource type="Script" uid="uid://cxbc15w6f1fea" path="res://connected.gd" id="8_tdh31"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_86xni"]
+shader = ExtResource("2_vqw7c")
+shader_parameter/speed = 0.2890000137275
+shader_parameter/distortion_amount = 0.3190000151525
+shader_parameter/rgb_shift_strength = 0.042000001995
+shader_parameter/scanline_intensity = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqw7c"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+bg_color = Color(0, 0, 0, 0.78431374)
+
+[node name="Home" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.074395336, 0.09303323, 0.31091842, 1)
+self_modulate = Color(0.25262207, 0.18274765, 0.60199416, 1)
+material = SubResource("ShaderMaterial_86xni")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vqw7c")
+expand_mode = 1
+
+[node name="M" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="M"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="M/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Connect" type="Button" parent="M/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/normal = ExtResource("3_86xni")
+theme_override_styles/hover = ExtResource("4_86xni")
+theme_override_styles/disabled = ExtResource("5_qq0qw")
+theme_override_styles/focus = ExtResource("5_qq0qw")
+text = "Connect"
+
+[node name="Disconnect" type="Button" parent="M/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/normal = ExtResource("3_86xni")
+theme_override_styles/hover = ExtResource("4_86xni")
+theme_override_styles/disabled = ExtResource("5_qq0qw")
+theme_override_styles/focus = ExtResource("5_qq0qw")
+text = "Disconnect"
+
+[node name="HSeparator" type="HSeparator" parent="M/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="M/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="M/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Proxy Port:"
+
+[node name="Port" type="LineEdit" parent="M/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "10808"
+alignment = 1
+expand_to_text_length = true
+
+[node name="Output" type="RichTextLabel" parent="M/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+mouse_filter = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_vqw7c")
+bbcode_enabled = true
+text = "[b]Informations of the connection[/b]
+-------------------------------------------------
+"
+scroll_following = true
+threaded = true
+selection_enabled = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("init_state")]
+script = ExtResource("2_o1ld7")
+init_state = NodePath("IDLE")
+metadata/_custom_type_script = "uid://bd7rdlgn55cgg"
+
+[node name="IDLE" type="Node" parent="StateMachine"]
+script = ExtResource("3_w1mvj")
+metadata/_custom_type_script = "uid://cs23rcsws47fm"
+
+[node name="Disconnected" type="Node" parent="StateMachine"]
+script = ExtResource("7_q6q8i")
+metadata/_custom_type_script = "uid://cs23rcsws47fm"
+
+[node name="Connected" type="Node" parent="StateMachine"]
+script = ExtResource("8_tdh31")
+metadata/_custom_type_script = "uid://cs23rcsws47fm"
+
+[connection signal="pressed" from="M/VBoxContainer/HBoxContainer/Connect" to="StateMachine" method="_on_connect_pressed"]
+[connection signal="pressed" from="M/VBoxContainer/HBoxContainer/Disconnect" to="StateMachine" method="_on_disconnect_pressed"]

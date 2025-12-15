@@ -1,0 +1,45 @@
+@echo off
+setlocal EnableDelayedExpansion
+
+set PRIMARY_DNS=8.8.8.8
+rem set SECONDARY_DNS=1.1.1.1
+
+echo Setting [b]primary and secondary[/b] DNS for all active IPv4 adapters...
+
+
+:: Initialize counter
+set count=0
+
+:: Get all adapter names from netsh
+for /f "skip=3 tokens=1,2,3,*" %%A in ('netsh interface show interface') do (
+    set "name=%%D"
+    :: Only store non-empty names
+    if not "!name!"=="" (
+        set /a count+=1
+        set "adapter[!count!]=!name!"
+    )
+)
+
+:: Check if any adapters were found
+if %count%==0 (
+    echo No adapters found.
+    exit /b
+)
+
+:: Iterate over the array and echo adapter names
+echo Network Adapters:
+for /l %%i in (1,1,%count%) do (
+    	echo we are setting adaptor:[color=#ffaa00] !adapter[%%i]! [/color]
+        netsh interface ip delete dns name="!adapter[%%i]!" all >nul
+        netsh interface ip set dns name="!adapter[%%i]!" static %PRIMARY_DNS% primary >nul
+)
+
+ipconfig /flushdns
+echo Primary DNS set to [b] %PRIMARY_DNS% [/b]
+
+
+
+
+
+
+
