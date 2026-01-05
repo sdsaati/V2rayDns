@@ -26,7 +26,7 @@ void fragment() {
     vec2 uv_distorted = uv + vec2(distort_x, distort_y);
 
     // Sample the texture normally + for RGB shift
-    vec4 col_r = texture(TEXTURE, uv_distorted + vec2(rgb_shift_strength, 0.0));
+    vec4 col_r = texture(TEXTURE, uv_distorted + vec2(rgb_shift_strength, 1.0));
     vec4 col_g = texture(TEXTURE, uv_distorted);
     vec4 col_b = texture(TEXTURE, uv_distorted - vec2(rgb_shift_strength, 0.0));
 

@@ -6,6 +6,7 @@ func enter() -> void:
 	connect_btn.disabled = true
 	state_machine.change_port()
 	state_machine.run_program()
+	Global.echo("[color=#ff0000]..................... Please Wait .....................[/color]")
 
 
 

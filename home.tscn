@@ -12,9 +12,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_86xni"]
 shader = ExtResource("2_vqw7c")
-shader_parameter/speed = 0.2890000137275
-shader_parameter/distortion_amount = 0.3190000151525
-shader_parameter/rgb_shift_strength = 0.042000001995
+shader_parameter/speed = 0.10000000475
+shader_parameter/distortion_amount = 0.0390000018525
+shader_parameter/rgb_shift_strength = 0.05000000074506
 shader_parameter/scanline_intensity = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqw7c"]
@@ -31,8 +31,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(0.074395336, 0.09303323, 0.31091842, 1)
-self_modulate = Color(0.25262207, 0.18274765, 0.60199416, 1)
 material = SubResource("ShaderMaterial_86xni")
 layout_mode = 1
 anchors_preset = 15
@@ -86,10 +84,12 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Label" type="Label" parent="M/VBoxContainer/HBoxContainer2"]
+visible = false
 layout_mode = 2
 text = "Proxy Port:"
 
 [node name="Port" type="LineEdit" parent="M/VBoxContainer/HBoxContainer2"]
+visible = false
 layout_mode = 2
 text = "10808"
 alignment = 1

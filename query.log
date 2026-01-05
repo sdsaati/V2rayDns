@@ -1,0 +1,10 @@
+[2026-01-05 09:49:41]	127.0.0.1	youtube.com	A	NOT_READY	0ms	-
+[2026-01-05 09:49:41]	127.0.0.1	youtube.com	A	NOT_READY	0ms	-
+[2026-01-05 09:49:41]	127.0.0.1	youtube.com	A	NOT_READY	0ms	-
+[2026-01-05 09:49:55]	127.0.0.1	youtube.com	A	PASS	1701ms	dnscry.pt-istanbul-ipv4
+[2026-01-05 09:50:08]	127.0.0.1	youtube.com	A	PASS	0ms	-
+[2026-01-05 09:50:13]	127.0.0.1	youtube.com	A	PASS	0ms	-
+[2026-01-05 09:50:23]	127.0.0.1	gol.project-a2.com	A	PASS	1716ms	dnscry.pt-istanbul-ipv4
+[2026-01-05 09:50:40]	127.0.0.1	google.com	A	PASS	1716ms	dnscry.pt-copenhagen-ipv4
+[2026-01-05 09:50:42]	127.0.0.1	google.com	A	PASS	0ms	-
+[2026-01-05 09:50:52]	127.0.0.1	youtube.com	A	PASS	0ms	-

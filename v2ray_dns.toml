@@ -6,7 +6,7 @@
 ########################
 # Network
 ########################
-server_names = ['google', 'cloudflare']
+#server_names = ['google', 'cloudflare']
 listen_addresses = ['127.0.0.1:53']
 max_clients = 250
 
@@ -23,7 +23,7 @@ block_ipv6 = true
 ########################
 
 dnscrypt_servers = true
-doh_servers = true
+doh_servers = false
 odoh_servers = false
 
 require_dnssec = false
@@ -34,7 +34,7 @@ require_nofilter = true
 # Proxy (V2Ray)
 ########################
 
-proxy = 'socks5://127.0.0.1:10808'
+#proxy = 'socks5://127.0.0.1:10808'
 
 ########################
 # Load balancing
